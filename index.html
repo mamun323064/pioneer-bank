@@ -35,14 +35,14 @@
         <div class="col-md-4">
             <div class="withdraw status">
                <h5>Withdraw</h5>
-               <h2>$00</h2>
+               <h2>$<span id="currentWithdraw">00</span></h2>
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="balance status">
                <h5>Balance</h5>
-               <h2>$<span id="currentBalance">1240</span></h2>
+               <h2>$<span id="currentBalance">00</span></h2>
             </div>
         </div> 
     </div>
@@ -113,18 +113,24 @@
 const withdrawBtn = document.getElementById("addWithdraw");
 
 withdrawBtn.addEventListener("click", function(){
-const withdrawNumber = getInputNumber("withdrawAmmount");
+    const withdrawAmount = document.getElementById("withdrawAmmount").value;
+    const withdrawNumber = parseFloat(withdrawAmount);
+    const currentWithdraw = document.getElementById("currentWithdraw").innerText;
+    const currentWithdrawNumber = parseFloat(currentWithdraw);
+    const totalWithdraw = withdrawNumber + currentWithdrawNumber;
+    document.getElementById("currentWithdraw").innerText = totalWithdraw;
 
-document.getElementById("withdrawAmmount").value = "";
-    console.log(withdrawAmmount);
-})
+    const currentBalance = document.getElementById("currentBalance").innerText;
+   const currentBalanceNumber = parseFloat(currentBalance);
+   const totalBalance = withdrawNumber - currentBalanceNumber;
+   document.getElementById("currentBalance").innerText = totalBalance;
+
+    document.getElementById("withdrawAmmount").value = "";
+    console.log(withdrawNumber);
+});
     
 
-function getInputNumber(id){
-    const amount = document.getElementById(id).value;
-    const amountNumber = parseFloat(amount);
-    return amountNumber;
-}
+
 </script>
     
 </body>
